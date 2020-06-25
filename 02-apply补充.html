@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        var obj = {
+            0:"abc",
+            1:"def",
+            2:"hig",
+            length:3
+        }
+		// 错误的代码
+		// var arr = [].concat(1,2,3,4,5);
+		// console.log(arr);
+		
+		// !!!concat()该参数可以是具体的值，也可以是数组对象。可以是任意多个。
+		
+		// 正确的代码
+		var arr = [].concat.apply([],obj);
+		// var arr1 = [].concat(obj[0],obj[1],obj[2])
+		console.log(arr);
+		// console.log(arr1);
+		
+		function test() {
+			console.log(this.valueOf());
+			console.log(+this);
+			console.log(""+this);
+		}
+		test.apply(1);
+		test.apply("abc");
+		test.apply(true);
+		test.apply(undefined)
+		
+		// 当用call和apply传入的第一个参数为值类型的时候
+		// 会将值类型转换成对应的对象(引用类型)然后赋值给this
+		
+		// 当传入的第一个参数为null或者undefined的时候
+		// 会把this赋值为 window
+		
+		// 借用构造函数,实现继承
+		function Person() {
+			this.name = "已名";
+			this.age = 18;
+		}
+		function Student() {
+			this.name1 = "zs";
+			this.name = "zs";
+			var stu = this;
+			Person.apply(stu);
+		}
+		var stu = new Student();
+		console.log(stu);
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>
